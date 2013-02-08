@@ -1,0 +1,39 @@
+// --------------------------------------------
+// Mod setup
+// --------------------------------------------
+// Basics
+BACKUP ~imoenfriendship/backup~
+AUTHOR ~K'aeloree (kae@spellholdstudios.net)~
+VERSION ~2~
+README ~imoenfriendship/imoenfriendship.html~
+
+// Translations
+AUTO_TRA ~imoenfriendship/translations/%s~
+
+LANGUAGE ~English~
+         ~English~
+         ~imoenfriendship/translations/english/setup.tra~
+LANGUAGE ~Russian~
+         ~Russian~
+         ~imoenfriendship/translations/russian/setup.tra~
+LANGUAGE ~Polish~
+         ~Polish~                                       
+         ~imoenfriendship/translations/polish/setup.tra~
+         
+// Baldur's Gate II
+BEGIN @0
+
+// Adding CD_STATE_NOTVALID
+APPEND ~STATE.IDS~
+  ~0x80101FEF CD_STATE_NOTVALID~
+  UNLESS ~CD_STATE_NOTVALID~
+
+// Compiling dialogue & scripts
+COMPILE ~imoenfriendship/dialogue/imoen2j.d~
+EXTEND_BOTTOM ~imoen2.bcs~ ~imoenfriendship/scripts/imoen2.baf~
+
+ACTION_IF FILE_EXISTS ~data/25dialog.bif~ THEN BEGIN
+  COMPILE ~imoenfriendship/dialogue/imoen25j.d~
+  EXTEND_TOP ~imoe25.bcs~ ~imoenfriendship/scripts/imoe25.baf~
+END
+
